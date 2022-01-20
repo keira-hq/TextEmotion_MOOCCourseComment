@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+	<script src="{% static 'js/jquery-1.11.0.min.js' %}"></script>
+    <title>首页</title>
+
+
+</head>
+
+
+<body bgcolor="grey">
+	<center>
+	<div class="shurukuang">
+	<input type="text" placeholder="请输入url" class="shurukuang" id="url">
+</div>
+		</center>
+
+	<center>
+<div class="btn2">
+	<BUTTON style="width:100px" onclick="moocpinglun()">
+		<p>开始分析</p>
+	</BUTTON>
+</div>
+		</center>
+
+<script language="JavaScript">
+
+    function moocpinglun() {
+        var url = document.getElementById("url").value;    //获取要传到后台的数据
+        $.ajax(
+        {
+            type: "GET",
+            url: "/pinglunfenxi/?url="+url,    //后台处理函数的url
+            success: function (result) {  //获取后台处理后传过来的result
+                document.getElementById("reportFrame").srcdoc=result
+            },
+            error:function(){
+         alert('查询失败')
+       }
+        });
+    }
+
+
+</script>
+
+<center>
+<iframe srcdoc="" width="1000" height="500"   frameborder="1/0"  id="reportFrame"     scrolling="yes" class="if1">
+</iframe>
+</center>
+</body>
+</html>
